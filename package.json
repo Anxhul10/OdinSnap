@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc -p .",
     "start": "yarn run build -- --w",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "cs": "changeset"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",

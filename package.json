@@ -1,6 +1,5 @@
 {
   "name": "odinsnap",
-  "packageManager": "yarn@4.9.1",
   "version": "0.0.1",
   "type": "module",
   "scripts": {

@@ -1,3 +1,3 @@
-import { Hello } from './core/hellow'
-
-Hello();
+function Hello(): void {
+    console.log("hlo from main")
+}

@@ -3,9 +3,14 @@
   "packageManager": "yarn@4.9.1",
   "scripts": {
     "build": "tsc -p .",
-    "start": "yarn run build -- --w"
+    "start": "yarn run build -- --w",
+    "lint": "eslint ."
   },
+  "type": "module",
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.0"
   }
 }

@@ -1,4 +1,11 @@
 {
   "name": "odinsnap",
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.9.1",
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "yarn run build -- --w"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
 }

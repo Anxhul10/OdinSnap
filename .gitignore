@@ -2,3 +2,4 @@ node_modules
 .pnp.cjs
 .yarn
 dist
+.pnp.loader.mjs

@@ -1,1 +1,3 @@
-console.log("hellow world")
+import { Hello } from './core/hellow'
+
+Hello();

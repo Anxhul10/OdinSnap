@@ -8,5 +8,5 @@ import tseslint from 'typescript-eslint';
 export default defineConfig(
   eslint.configs.recommended,
   tseslint.configs.recommended,
-  [globalIgnores(["./examples",'./dist', '!*.ts'])]
+  [globalIgnores(['./examples','./dist', '!*.ts'])]
 );

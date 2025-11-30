@@ -28,6 +28,7 @@ jobs:
           node-version: 22.20.0
       - name: Run install
         uses: borales/actions-yarn@v5
+        working-directory: ./examples/react-vite/
         with:
           cmd: install
       - name: Build
@@ -45,6 +46,7 @@ jobs:
           node-version: 22.20.0
       - name: Run install
         uses: borales/actions-yarn@v5
+        working-directory: ./examples/react-webpack/
         with:
           cmd: install
       - name: Build

@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 22.20.0
       - name: Run install
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v5
         with:
           cmd: install
       - name: Build

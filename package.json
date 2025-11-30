@@ -5,7 +5,8 @@
   "scripts": {
     "build": "tsc -p .",
     "start": "yarn run build -- --w",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "cs": "changeset"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
@@ -15,6 +16,8 @@
     "typescript-eslint": "^8.48.0"
   },
   "engines": {
-    "node": "21.1.0"
-  }
+    "node": "22.20.0",
+    "yarn": "4.9.0"
+  },
+  "packageManager": "yarn@4.9.0"
 }

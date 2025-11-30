@@ -1,24 +1,19 @@
-name: ci
+name: lint 
 on:
   push:
-  pull_request:
 jobs:
   build:
-    name: build & lint
+    name: lint checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 21.1.0
-
+          node-version: 22.20.0
       - name: Run install
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v5
         with:
           cmd: install
-      - name: Build
-        run: |
-          yarn build
       - name: lint checks
         run: |
           yarn lint

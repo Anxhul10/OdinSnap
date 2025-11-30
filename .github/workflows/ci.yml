@@ -1,7 +1,6 @@
 name: ci
 on:
   push:
-  pull_request:
 jobs:
   build-OdinSnap:
     name: build OdinSnap
@@ -31,7 +30,6 @@ jobs:
         run: yarn install
       - name: Build
         run: |
-          yarn install
           cd examples/react-vite/
           yarn build
   build-webpack-eg:
@@ -43,10 +41,9 @@ jobs:
         with:
           node-version: 22.20.0
       - name: Install dependencies
-        working-directory: ./examples/react-vite/
+        working-directory: ./examples/react-webpack/
         run: yarn install
       - name: Build
         run: |
-          yarn install
           cd examples/react-webpack/
           yarn build

@@ -56,7 +56,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/cli@npm:^2.29.7":
+"@changesets/cli@npm:^2.29.8":
   version: 2.29.8
   resolution: "@changesets/cli@npm:2.29.8"
   dependencies:
@@ -1414,7 +1414,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "odinsnap@workspace:."
   dependencies:
-    "@changesets/cli": "npm:^2.29.7"
+    "@changesets/cli": "npm:^2.29.8"
     "@eslint/js": "npm:^9.39.1"
     eslint: "npm:^9.39.1"
     typescript: "npm:^5.9.3"

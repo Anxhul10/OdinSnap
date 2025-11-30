@@ -11,13 +11,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 22.20.0
-      - name: enable corepack
-        run: |
-          corepack enable
-          yarn set version 4.9.0
       - name: Run install
-        run: |
-          yarn install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
       - name: Build
         run: |
           yarn build

@@ -1429,6 +1429,8 @@ __metadata:
     jiti: "npm:^2.6.1"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.48.0"
+  bin:
+    odinsnap: ./dist/cli/cli.js
   languageName: unknown
   linkType: soft
 

@@ -5,6 +5,7 @@
   "exports": {
     ".": "./dist/index.js"
   },
+  "bin": "./dist/cli/cli.js",
   "scripts": {
     "build": "tsc -p .",
     "start": "yarn run build -- --w",

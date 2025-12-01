@@ -3349,15 +3349,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"odinsnap@file:../..::locator=react-vite%40workspace%3A.":
-  version: 0.0.1
-  resolution: "odinsnap@file:../..#../..::hash=f0f8ab&locator=react-vite%40workspace%3A."
-  bin:
-    odinsnap: ./dist/cli/cli.js
-  checksum: 10c0/e814c46a52f76f68c8f82baae603693563c367f8e605e85f7ef8ea497ce7ec04e35de69f13178d863592b7f6cbbbb598cb0b3c33e1992d41dfd5adb6bdf6af41
-  languageName: node
-  linkType: hard
-
 "optionator@npm:^0.9.3":
   version: 0.9.4
   resolution: "optionator@npm:0.9.4"
@@ -3632,7 +3623,6 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.24"
     eslint-plugin-storybook: "npm:^10.1.2"
     globals: "npm:^16.5.0"
-    odinsnap: ../..
     playwright: "npm:^1.57.0"
     react: "npm:^19.2.0"
     react-dom: "npm:^19.2.0"

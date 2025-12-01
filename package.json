@@ -10,7 +10,8 @@
     "build": "tsc -p .",
     "start": "yarn run build -- --w",
     "lint": "eslint .",
-    "cs": "changeset"
+    "cs": "changeset",
+    "start:node": "node --loader ts-node/esm index.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",

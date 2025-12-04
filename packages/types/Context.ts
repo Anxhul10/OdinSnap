@@ -1,7 +1,7 @@
 export interface Context {
   payload: {
-    pull_request: head_base
-  }
+    pull_request: head_base;
+  };
 }
 
 interface head_base {

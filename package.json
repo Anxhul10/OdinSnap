@@ -29,7 +29,6 @@
     "node": "22.20.0",
     "yarn": "4.9.0"
   },
-  "packageManager": "yarn@4.9.0",
   "dependencies": {
     "@actions/github": "^6.0.1",
     "@discoveryjs/json-ext": "^0.6.3",

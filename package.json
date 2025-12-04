@@ -34,5 +34,6 @@
     "@discoveryjs/json-ext": "^0.6.3",
     "execa": "^9.6.1",
     "tsx": "^4.21.0"
-  }
+  },
+  "packageManager": "yarn@4.9.0"
 }

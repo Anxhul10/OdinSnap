@@ -15,22 +15,25 @@ export const trimStats = async (filePath: string, newFileName: string) => {
   const getStats: IGetStats = await readStatsFile(filePath);
   const trimmedStats = getStats.modules
     .filter((module) => isUserCode(module))
-    .map((value) => {
-      return ["name", "id", "reasons"].reduce((result, key) => {
-        if (key === "reasons") {
-          result[key] = value[key].map(
-            (reasonObj: { moduleName: string; moduleId: string }) => {
-              return {
-                moduleName: reasonObj.moduleName,
-                moduleId: reasonObj.moduleId,
-              };
-            },
-          );
-        } else {
-          result[key] = value[key];
-        }
-        return result;
-      }, {});
+    .map((value: Record<string, any>) => {
+      return ["name", "id", "reasons"].reduce<Record<string, any>>(
+        (result, key) => {
+          if (key === "reasons") {
+            result[key] = value[key].map(
+              (reasonObj: { moduleName: string; moduleId: string }) => {
+                return {
+                  moduleName: reasonObj.moduleName,
+                  moduleId: reasonObj.moduleId,
+                };
+              },
+            );
+          } else {
+            result[key] = value[key];
+          }
+          return result;
+        },
+        {},
+      );
     });
   try {
     const trimmedJSON = JSON.stringify({ modules: trimmedStats }, null, 4);

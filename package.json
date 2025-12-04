@@ -11,7 +11,7 @@
     "start": "yarn run build -- --w",
     "lint": "eslint .",
     "cs": "changeset",
-    "start:node": "node --loader ts-node/esm index.ts",
+    "start:node": "node tsx index.ts",
     "format": "prettier . --write",
     "format:ci": "prettier . --check"
   },
@@ -22,7 +22,6 @@
     "eslint": "^9.39.1",
     "jiti": "^2.6.1",
     "prettier": "3.7.4",
-    "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0"
   },
@@ -34,6 +33,7 @@
   "dependencies": {
     "@actions/github": "^6.0.1",
     "@discoveryjs/json-ext": "^0.6.3",
-    "execa": "^9.6.1"
+    "execa": "^9.6.1",
+    "tsx": "^4.21.0"
   }
 }

@@ -9,5 +9,5 @@ if(res) {
     await generateStats();
 }
 else {
-    console.log('loki doesnt exist');
+    console.warn("OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.");
 }

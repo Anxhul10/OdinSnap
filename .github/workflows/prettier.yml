@@ -1,0 +1,14 @@
+name: prettier ci
+on:
+  push:
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.21.1
+      - run: yarn install
+      - name: prettier checks
+        run: yarn format:ci

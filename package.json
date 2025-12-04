@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "cs": "changeset",
     "start:node": "node --loader ts-node/esm index.ts",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "format:ci": "prettier . --check"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",

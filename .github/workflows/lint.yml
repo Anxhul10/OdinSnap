@@ -1,4 +1,4 @@
-name: lint 
+name: lint
 on:
   push:
 jobs:
@@ -17,4 +17,3 @@ jobs:
       - name: lint checks
         run: |
           yarn lint
-      

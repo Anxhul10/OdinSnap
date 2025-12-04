@@ -1,10 +1,14 @@
 #!/usr/bin/env node
-import { checkPkgExist } from '../packages/cliHelpers/checkPkgExist.js';
+import { checkPkgExist } from "../packages/cliHelpers/checkPkgExist.js";
+import { generateStats } from "../packages/cliHelpers/generateStats.js";
+import { mkdir } from "../packages/cliHelpers/mkdir.js";
 
-const res = checkPkgExist('./package.json', 'loki');
-if(res) {
-    console.log("loki exist");
-}
-else {
-    console.log('loki doesnt exist');
+const res = checkPkgExist("./package.json", "loki");
+if (res) {
+  mkdir(".OdinSnap");
+  await generateStats();
+} else {
+  console.warn(
+    "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",
+  );
 }

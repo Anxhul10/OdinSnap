@@ -1,11 +1,11 @@
-import fs from 'node:fs';
+import fs from "node:fs";
 
 export function mkdir(folderName: string) {
-    try {
+  try {
     if (!fs.existsSync(folderName)) {
-        fs.mkdirSync(folderName);
+      fs.mkdirSync(folderName);
     }
-    } catch (err) {
+  } catch (err) {
     console.error(err);
-    }
+  }
 }

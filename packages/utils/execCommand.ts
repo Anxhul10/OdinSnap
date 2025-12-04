@@ -1,16 +1,16 @@
-import { spawn } from 'child_process';
+import { spawn } from "child_process";
 
-export const execCommand = (command:string) => {
+export const execCommand = (command: string) => {
   return new Promise((resolve, reject) => {
     const childProcess = spawn(command, {
-      stdio: 'inherit',
+      stdio: "inherit",
       shell: true,
     });
-    childProcess.on('error', (error) => {
+    childProcess.on("error", (error) => {
       reject(error);
     });
-    childProcess.on('exit', () => {
-      resolve('operation successful !!');
+    childProcess.on("exit", () => {
+      resolve("operation successful !!");
     });
   });
 };

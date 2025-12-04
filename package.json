@@ -11,7 +11,8 @@
     "start": "yarn run build -- --w",
     "lint": "eslint .",
     "cs": "changeset",
-    "start:node": "node --loader ts-node/esm index.ts"
+    "start:node": "node --loader ts-node/esm index.ts",
+    "format": "prettier . --write"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",

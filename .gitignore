@@ -2,3 +2,4 @@ node_modules
 .pnp.cjs
 dist
 .pnp.loader.mjs
+.OdinSnap

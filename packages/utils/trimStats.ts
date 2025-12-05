@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { writeFile } from "fs/promises";
 import { type IGetStats } from "../types/IGetStats";
 import { readStatsFile } from "./readStats.js";

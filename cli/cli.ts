@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { checkPkgExist } from "../packages/cliHelpers/checkPkgExist.js";
-import { generateStats } from "../packages/cliHelpers/generateStats.js";
-import { mkdir } from "../packages/cliHelpers/mkdir.js";
+import { checkPkgExist } from "@/packages/cliHelpers/checkPkgExist";
+import { generateStats } from "@/packages/cliHelpers/generateStats";
+import { mkdir } from "@/packages/cliHelpers/mkdir";
 
 const res = checkPkgExist("./package.json", "loki");
 if (res) {

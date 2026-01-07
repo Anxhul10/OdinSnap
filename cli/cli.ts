@@ -6,12 +6,16 @@ import fs from "fs";
 
 export async function runner() {
   const res = checkPkgExist("./package.json", "loki");
+  fs.stat(".OdinSnap", function (err, _stat) {
+    if (err !== null && err.code === "ENOENT") {
+      mkdir(".OdinSnap");
+    }
+  });
   if (res) {
-    mkdir(".OdinSnap");
-    await generateStats();
+    // await generateStats();
 
     // checks project is monorepo or not
-    fs.stat("dependency-graph.json", function (err, _stat) {
+    fs.stat("./OdinSnap/dependency-graph.json", function (err, _stat) {
       if (err == null) {
         console.log("Monorepo");
       } else if (err.code === "ENOENT") {

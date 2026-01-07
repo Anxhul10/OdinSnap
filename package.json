@@ -5,9 +5,9 @@
   "exports": {
     ".": "./dist/index.js"
   },
-  "bin": "./dist/cli/cli.js",
+  "bin": "./dist/bin/odinsnap.js",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p . && tsc-alias",
     "start": "yarn run build -- --w",
     "lint": "eslint .",
     "cs": "changeset",
@@ -22,6 +22,7 @@
     "eslint": "^9.39.1",
     "jiti": "^2.6.1",
     "prettier": "3.7.4",
+    "tsc-alias": "1.8.16",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0"
   },

@@ -30,5 +30,8 @@
     "node": "22.20.0",
     "yarn": "4.9.0"
   },
-  "packageManager": "yarn@4.9.0"
+  "packageManager": "yarn@4.9.0",
+  "dependencies": {
+    "dag-rs": "^0.2.1"
+  }
 }

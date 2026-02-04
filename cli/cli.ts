@@ -3,8 +3,12 @@ import { checkPkgExist } from "@/packages/cliHelpers/checkPkgExist";
 import { generateStats } from "@/packages/cliHelpers/generateStats";
 import { mkdir } from "@/packages/cliHelpers/mkdir";
 import fs from "fs";
+import dag from 'dag-rs';
 
 export async function runner() {
+  for (const obj of dag()) {
+    console.log(obj);
+  }
   const res = checkPkgExist("./package.json", "loki");
   fs.stat("./OdinSnap", function (err, _stat) {
     if (err !== null && err.code === "ENOENT") {

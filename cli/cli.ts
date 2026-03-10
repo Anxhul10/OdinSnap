@@ -6,9 +6,6 @@ import fs from "fs";
 import dag from 'dag-rs';
 
 export async function runner() {
-  for (const obj of dag()) {
-    console.log(obj);
-  }
   const res = checkPkgExist("./package.json", "loki");
   fs.stat("./OdinSnap", function (err, _stat) {
     if (err !== null && err.code === "ENOENT") {
@@ -18,18 +15,7 @@ export async function runner() {
     }
   });
   if (res) {
-    // await generateStats();
-    // checks project is monorepo or not
-    fs.stat("./.OdinSnap/dependency-graph.json", function (err, _stat) {
-      if (err == null) {
-        console.log("Monorepo");
-      } else if (err.code === "ENOENT") {
-        // file does not exist
-        console.log("Not a Monorepo");
-      } else {
-        console.log("Some other error: ", err.code);
-      }
-    });
+    console.log("wip...")
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

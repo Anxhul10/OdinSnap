@@ -1,6 +1,6 @@
 {
   "name": "odinsnap",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "exports": {
     ".": "./dist/index.js"
@@ -10,7 +10,7 @@
     "build": "tsc -p . && tsc-alias",
     "start": "yarn run build -- --w",
     "lint": "eslint .",
-    "cs": "changeset",
+    "cs": "changeset && changeset version && changeset publish",
     "start:node": "node tsx index.ts",
     "format": "prettier . --write",
     "format:ci": "prettier . --check"

@@ -8,6 +8,9 @@ import { identifyPackageManager } from "identify-package-manager";
 import { execCommand } from "@/packages/utils/execCommand";
 
 export async function runner() {
+  // temp variable for test only !!
+  const changedFiles = [];
+  
   const res = checkPkgExist("./package.json", "loki");
   fs.stat("./OdinSnap", function (err, _stat) {
     if (err !== null && err.code === "ENOENT") {
@@ -33,6 +36,7 @@ export async function runner() {
         "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
       );
     }
+    // iterate over changed files
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

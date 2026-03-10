@@ -1,17 +1,17 @@
 {
   "name": "odinsnap",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "exports": {
     ".": "./dist/index.js"
   },
-  "bin": "./dist/cli/cli.js",
+  "bin": "./dist/bin/odinsnap.js",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p . && tsc-alias",
     "start": "yarn run build -- --w",
     "lint": "eslint .",
-    "cs": "changeset",
-    "start:node": "node --loader ts-node/esm index.ts",
+    "cs": "changeset && changeset version && changeset publish",
+    "start:node": "node tsx index.ts",
     "format": "prettier . --write",
     "format:ci": "prettier . --check"
   },
@@ -22,7 +22,7 @@
     "eslint": "^9.39.1",
     "jiti": "^2.6.1",
     "prettier": "3.7.4",
-    "ts-node": "^10.9.2",
+    "tsc-alias": "1.8.16",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0"
   },
@@ -30,8 +30,13 @@
     "node": "22.20.0",
     "yarn": "4.9.0"
   },
-  "packageManager": "yarn@4.9.0",
   "dependencies": {
-    "dag-rs": "^0.2.1"
-  }
+    "@actions/github": "^6.0.1",
+    "@discoveryjs/json-ext": "^0.6.3",
+    "dag-rs": "^0.2.1",
+    "execa": "^9.6.1",
+    "identify-package-manager": "^1.1.0",
+    "tsx": "^4.21.0"
+  },
+  "packageManager": "yarn@4.9.0"
 }

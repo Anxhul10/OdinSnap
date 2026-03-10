@@ -17,7 +17,7 @@ export const trimStats = async (filePath: string, newFileName: string) => {
   const trimmedStats = getStats.modules
     .filter((module) => isUserCode(module))
     .map((value: Record<string, any>) => {
-      return ["name", "id", "reasons"].reduce<Record<string, any>>(
+      return ["name", "id", "nameForCondition", "reasons"].reduce<Record<string, any>>(
         (result, key) => {
           if (key === "reasons") {
             result[key] = value[key].map(

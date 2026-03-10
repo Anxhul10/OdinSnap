@@ -1228,7 +1228,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.7.0":
+"ci-info@npm:^3.2.0, ci-info@npm:^3.7.0":
   version: 3.9.0
   resolution: "ci-info@npm:3.9.0"
   checksum: 10c0/6f0109e36e111684291d46123d491bc4e7b7a1934c3a20dea28cba89f1d4a03acd892f5f6a81ed3855c38647e285a150e3c9ba062e38943bef57fee6c1554c3a
@@ -1934,6 +1934,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"identify-monorepo-root@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "identify-monorepo-root@npm:1.0.9"
+  dependencies:
+    minimist: "npm:^1.2.8"
+    who-am-i-now: "npm:^2.1.1"
+  bin:
+    identify-monorepo-root: build/cli.js
+  checksum: 10c0/497a8f03fba08bcf5ce2995f963c73ba6310adfc1676f38a21b1b6d3d7193942264c22a0170dbf99394850707a61ecb3059b7c6d6fe99dc3a02d551a76a3e367
+  languageName: node
+  linkType: hard
+
+"identify-package-manager@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "identify-package-manager@npm:1.1.0"
+  dependencies:
+    identify-monorepo-root: "npm:^1.0.9"
+    minimist: "npm:^1.2.8"
+    who-am-i-now: "npm:^2.1.1"
+  bin:
+    identify-package-manager: build/cli.js
+  checksum: 10c0/f5bbd299233edc7acd35565feaf9e84ca6ec209c5487800599999b8f4d741cf2ac82342decf098582716344888486c97b44e03dc4c764e5c4427952f0f5059e1
+  languageName: node
+  linkType: hard
+
 "ignore@npm:^5.2.0":
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
@@ -1978,6 +2003,17 @@ __metadata:
   dependencies:
     binary-extensions: "npm:^2.0.0"
   checksum: 10c0/a16eaee59ae2b315ba36fad5c5dcaf8e49c3e27318f8ab8fa3cdb8772bf559c8d1ba750a589c2ccb096113bb64497084361a25960899cb6172a6925ab6123d38
+  languageName: node
+  linkType: hard
+
+"is-ci@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "is-ci@npm:3.0.1"
+  dependencies:
+    ci-info: "npm:^3.2.0"
+  bin:
+    is-ci: bin.js
+  checksum: 10c0/0e81caa62f4520d4088a5bef6d6337d773828a88610346c4b1119fb50c842587ed8bef1e5d9a656835a599e7209405b5761ddf2339668f2d0f4e889a92fe6051
   languageName: node
   linkType: hard
 
@@ -2241,6 +2277,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimist@npm:^1.2.8":
+  version: 1.2.8
+  resolution: "minimist@npm:1.2.8"
+  checksum: 10c0/19d3fcdca050087b84c2029841a093691a91259a47def2f18222f41e7645a0b7c44ef4b40e88a1e58a40c84d2ef0ee6047c55594d298146d0eb3f6b737c20ce6
+  languageName: node
+  linkType: hard
+
 "minipass-collect@npm:^2.0.1":
   version: 2.0.1
   resolution: "minipass-collect@npm:2.0.1"
@@ -2412,6 +2455,7 @@ __metadata:
     dag-rs: "npm:^0.2.1"
     eslint: "npm:^9.39.1"
     execa: "npm:^9.6.1"
+    identify-package-manager: "npm:^1.1.0"
     jiti: "npm:^2.6.1"
     prettier: "npm:3.7.4"
     tsc-alias: "npm:1.8.16"
@@ -2695,6 +2739,18 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: 10c0/900a93d3cdae3acd7d16f642c29a642aea32c2026446151f0778c62ac089d4b8e6c986811076e1ae180a694cedf077d453a11b58ff0a865629a4f82ab558e102
+  languageName: node
+  linkType: hard
+
+"react-device-detect@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "react-device-detect@npm:2.2.3"
+  dependencies:
+    ua-parser-js: "npm:^1.0.33"
+  peerDependencies:
+    react: ">= 0.14.0"
+    react-dom: ">= 0.14.0"
+  checksum: 10c0/396bbeeab0cb21da084c67434d204c9cf502fad6c683903313084d3f6487950a36a34f9bf67ccf5c1772a1bb5b79a2a4403fcfe6b51d93877db4c2d9f3a3a925
   languageName: node
   linkType: hard
 
@@ -3034,6 +3090,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ua-parser-js@npm:^1.0.33":
+  version: 1.0.41
+  resolution: "ua-parser-js@npm:1.0.41"
+  bin:
+    ua-parser-js: script/cli.js
+  checksum: 10c0/45dc1f7f3ce8248e0e64640d2e29c65c0ea1fc9cb105594de84af80e2a57bba4f718b9376098ca7a5b0ffe240f8995b0fa3714afa9d36861c41370a378f1a274
+  languageName: node
+  linkType: hard
+
 "undici-types@npm:~7.16.0":
   version: 7.16.0
   resolution: "undici-types@npm:7.16.0"
@@ -3117,6 +3182,18 @@ __metadata:
   bin:
     node-which: bin/which.js
   checksum: 10c0/fe9d6463fe44a76232bb6e3b3181922c87510a5b250a98f1e43a69c99c079b3f42ddeca7e03d3e5f2241bf2d334f5a7657cfa868b97c109f3870625842f4cc15
+  languageName: node
+  linkType: hard
+
+"who-am-i-now@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "who-am-i-now@npm:2.1.1"
+  dependencies:
+    is-ci: "npm:^3.0.1"
+    react-device-detect: "npm:^2.2.3"
+  peerDependencies:
+    expo-constants: ^15.4.5
+  checksum: 10c0/cd8694c1fff83581456465ab89a5795285efb4493ebf9603510fe3fe004420f9ce101c9721afa31ed2dbeefc686905a9d660ba45ee35550a2a5a80066cb08060
   languageName: node
   linkType: hard
 

@@ -3,7 +3,7 @@ import { checkPkgExist } from "@/packages/cliHelpers/checkPkgExist";
 import { generateStats } from "@/packages/cliHelpers/generateStats";
 import { mkdir } from "@/packages/cliHelpers/mkdir";
 import fs from "fs";
-import dag from 'dag-rs';
+import dag from "dag-rs";
 import { identifyPackageManager } from "identify-package-manager";
 import { execCommand } from "@/packages/utils/execCommand";
 
@@ -19,23 +19,20 @@ export async function runner() {
   if (res) {
     // standlone
     const packageManager = identifyPackageManager(true);
-    
-    if(packageManager === "yarn-berry") {
-      execCommand("yarn build-storybook --stats-json")
-    }
-    else if(packageManager === "npm") {
-      console.log("npm run build-storybook --stats-json");
-    }
-    else if(packageManager === "pnpm") {
-      console.log("pnpm run build-storybook --stats-json");
-    }
-    else if(packageManager === "bun") {
-      console.log("bun run build-storybook --stats-json");
-    }
-    else {
-      console.log("some unknown package manager is being used !!")
-    }
 
+    if (packageManager === "yarn-berry") {
+      execCommand("yarn build-storybook --stats-json");
+    } else if (packageManager === "npm") {
+      console.log("npm run build-storybook --stats-json");
+    } else if (packageManager === "pnpm") {
+      console.log("pnpm run build-storybook --stats-json");
+    } else if (packageManager === "bun") {
+      console.log("bun run build-storybook --stats-json");
+    } else {
+      console.log(
+        "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
+      );
+    }
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

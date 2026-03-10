@@ -10,7 +10,7 @@ import { execCommand } from "@/packages/utils/execCommand";
 export async function runner() {
   // temp variable for test only !!
   const changedFiles = [];
-  
+
   const res = checkPkgExist("./package.json", "loki");
   fs.stat("./OdinSnap", function (err, _stat) {
     if (err !== null && err.code === "ENOENT") {
@@ -26,11 +26,11 @@ export async function runner() {
     if (packageManager === "yarn-berry") {
       execCommand("yarn build-storybook --stats-json");
     } else if (packageManager === "npm") {
-      console.log("npm run build-storybook --stats-json");
+      execCommand("npm run build-storybook --stats-json");
     } else if (packageManager === "pnpm") {
-      console.log("pnpm run build-storybook --stats-json");
+      execCommand("pnpm run build-storybook --stats-json");
     } else if (packageManager === "bun") {
-      console.log("bun run build-storybook --stats-json");
+      execCommand("bun run build-storybook --stats-json");
     } else {
       console.log(
         "some unknown package manager is being used !! or yarn version 1 or 2 is being used",

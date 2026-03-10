@@ -24,14 +24,15 @@ export async function runner() {
     const packageManager = identifyPackageManager(true);
 
     if (packageManager === "yarn-berry") {
-      execCommand("yarn build-storybook --stats-json");
+      execCommand("yarn storybook build --stats-json");
     } else if (packageManager === "npm") {
-      execCommand("npm run build-storybook --stats-json");
+      execCommand("npm run storybook build --stats-json");
     } else if (packageManager === "pnpm") {
-      execCommand("pnpm run build-storybook --stats-json");
+      execCommand("pnpm run storybook build --stats-json");
     } else if (packageManager === "bun") {
-      execCommand("bun run build-storybook --stats-json");
-    } else {
+      execCommand("bun run storybook build --stats-json");
+    } 
+    else {
       console.log(
         "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
       );

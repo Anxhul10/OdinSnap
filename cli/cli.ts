@@ -24,24 +24,57 @@ interface IStats {
   modules: IModule[]
   
 }
-export function affectedComponent(filePath: string, stats: IStats) {
+const affectedPaths: Set<string> = new Set();
+const componentTitle: Set<string> = new Set();
 
-  for(const module of stats.modules) {
-    if(module.nameForCondition != null ){
-      if(module.nameForCondition.includes(filePath)) {
-        for(const reason of module.reasons) {
-          console.log(reason);
+export function removeDot(filePath: string) {
+  const split = filePath.split('/');
+  if(split[0] == '.') {
+    let path = '';
+    for(let i = 1; i < split.length; i++) {
+      path += '/';
+      path += split[i];
+    }
+    return path;
+  }
+  return filePath;
+}
+export function affectedComponent(
+  filePath: string,
+  stats: IStats,
+  visited: Set<string> = new Set()
+) {
+  filePath = removeDot(filePath);
+
+  if (visited.has(filePath)) {
+    return;
+  }
+
+  visited.add(filePath);
+
+  for (const module of stats.modules) {
+    if (module.nameForCondition != null) {
+      if (module.nameForCondition.includes("node_modules")) {
+        continue;
+      }
+
+      if (module.nameForCondition.includes(filePath)) {
+        for (const reason of module.reasons) {
+          affectedPaths.add(reason.moduleName);
+          affectedComponent(reason.moduleName, stats, visited);
         }
       }
     }
   }
 }
+
 export async function runner() {
   // temp variable for test only !!
-  const changedFiles = ["/src/components/Tooltip/Tooltip.jsx"];
+  const changedFiles = ["/src/components/SmartLink/SmartLink.jsx"];
   const filePath = "./storybook-static/preview-stats.json";
   const trimmedName = path.join(".OdinSnap", "trimmed-stats.json")
-
+  const componentStatsPath = "./storybook-static/index.json";
+  const dest = path.join(".OdinSnap", "component-stats.json");
   const res = checkPkgExist("./package.json", "loki");
   fs.stat("./OdinSnap", function (err, _stat) {
     if (err !== null && err.code === "ENOENT") {
@@ -69,19 +102,26 @@ export async function runner() {
     //   );
     // }
     await trimStats(filePath, trimmedName);
-    // iterate over changed files
-
     const statsPath = trimmedName;
 
     const stats = await readStatsFile(statsPath);
-    // for(const filePath of changedFiles) {
-    //   console.log(stats);
-    // }
+    const componentStats = await readStatsFile(componentStatsPath);
+
     for(const filePath of changedFiles) {
-      // recursive
       affectedComponent(filePath, stats);
     }
-    
+
+    for(const cmpPath of affectedPaths) {
+      for(const [key, value] of Object.entries(componentStats.entries)) {
+        const importPath = (value as any).importPath;
+        const title = (value as any).title;
+        if(importPath.includes(cmpPath)) {
+          componentTitle.add(title);
+        }
+      }
+    }
+    console.log(componentTitle);
+
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

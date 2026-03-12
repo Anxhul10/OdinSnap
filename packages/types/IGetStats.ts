@@ -5,6 +5,7 @@ export interface IGetStats {
 export interface IModule {
   id: string;
   name: string;
+  nameForCondition?: string;
   reasons: IReason[];
 }
 

@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.21.1
+          node-version: 22.13.1
       - run: yarn install
       - name: prettier checks
         run: yarn format:ci

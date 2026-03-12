@@ -1,5 +1,11 @@
 # odinsnap
 
+## 2.0.0
+
+### Major Changes
+
+- add support for non-monorepo projects
+
 ## 1.0.0
 
 ### Major Changes

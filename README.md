@@ -30,6 +30,12 @@ By focusing only on changed and dependent components, OdinSnap helps developers 
 - OdinSnap detects changed files and identifies affected components
 - Loki tests run **only for those affected components**
 
+## TODO
+
+- Add **monorepo support**
+- Export a function that returns the **generated regex for affected components**
+- Add **CLI support for other visual regression tools**
+  
 ## Example
 
 Coming soon!

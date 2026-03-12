@@ -81,7 +81,7 @@ export async function runner() {
       mkdir(".OdinSnap");
     } else {
       console.log(".OdinSnap exists");
-    };
+    }
   });
   if (res) {
     // non-monorepo project

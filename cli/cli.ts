@@ -8,6 +8,8 @@ import { trimStats } from "@/packages/utils/trimStats";
 import path from "path";
 import { readStatsFile } from "@/packages/utils/readStats";
 import { generateRegex } from "@/packages/cliHelpers/generateRegex";
+import { getChangedFile } from "@/packages/git/git";
+import * as github from "@actions/github";
 
 interface IReason {
   moduleName: string;
@@ -20,18 +22,17 @@ interface IModule {
   reasons: IReason[];
 }
 interface IStats {
-  modules: IModule[]
-  
+  modules: IModule[];
 }
 const affectedPaths: Set<string> = new Set();
 const componentTitle: Set<string> = new Set();
 
 export function removeDot(filePath: string) {
-  const split = filePath.split('/');
-  if(split[0] == '.') {
-    let path = '';
-    for(let i = 1; i < split.length; i++) {
-      path += '/';
+  const split = filePath.split("/");
+  if (split[0] == ".") {
+    let path = "";
+    for (let i = 1; i < split.length; i++) {
+      path += "/";
       path += split[i];
     }
     return path;
@@ -41,7 +42,7 @@ export function removeDot(filePath: string) {
 export function affectedComponent(
   filePath: string,
   stats: IStats,
-  visited: Set<string> = new Set()
+  visited: Set<string> = new Set(),
 ) {
   filePath = removeDot(filePath);
 
@@ -68,72 +69,69 @@ export function affectedComponent(
 }
 
 export async function runner() {
+  const context = github.context;
   // temp variable for test only !!
-  const changedFiles = ["/src/components/SmartLink/SmartLink.jsx"];
+  const changedFiles = await getChangedFile(context);
   const filePath = "./storybook-static/preview-stats.json";
-  const trimmedName = path.join(".OdinSnap", "trimmed-stats.json")
+  const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
   const componentStatsPath = "./storybook-static/index.json";
-  const dest = path.join(".OdinSnap", "component-stats.json");
   const res = checkPkgExist("./package.json", "loki");
-  fs.stat("./OdinSnap", function (err, _stat) {
+  fs.stat("./OdinSnap", function (err) {
     if (err !== null && err.code === "ENOENT") {
       mkdir(".OdinSnap");
     } else {
       console.log(".OdinSnap exists");
-    }
+    };
   });
   if (res) {
-    // standlone
+    // non-monorepo project
     const packageManager = identifyPackageManager(true);
-    // temp skipping (not for prod)
-    // if (packageManager === "yarn-berry") {
-    //   execCommand("yarn storybook build --stats-json");
-    // } else if (packageManager === "npm") {
-    //   execCommand("npm run storybook build --stats-json");
-    // } else if (packageManager === "pnpm") {
-    //   execCommand("pnpm run storybook build --stats-json");
-    // } else if (packageManager === "bun") {
-    //   execCommand("bun run storybook build --stats-json");
-    // } 
-    // else {
-    //   console.log(
-    //     "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
-    //   );
-    // }
+    if (packageManager === "yarn-berry") {
+      execCommand("yarn storybook build --stats-json");
+    } else if (packageManager === "npm") {
+      execCommand("npm run storybook build --stats-json");
+    } else if (packageManager === "pnpm") {
+      execCommand("pnpm run storybook build --stats-json");
+    } else if (packageManager === "bun") {
+      execCommand("bun run storybook build --stats-json");
+    } else {
+      console.log(
+        "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
+      );
+    }
     await trimStats(filePath, trimmedName);
     const statsPath = trimmedName;
 
     const stats = await readStatsFile(statsPath);
     const componentStats = await readStatsFile(componentStatsPath);
 
-    for(const filePath of changedFiles) {
+    for (const filePath of changedFiles) {
       affectedComponent(filePath, stats);
     }
 
-    for(const cmpPath of affectedPaths) {
-      for(const [key, value] of Object.entries(componentStats.entries)) {
+    for (const cmpPath of affectedPaths) {
+      for (const [, value] of Object.entries(componentStats.entries)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const importPath = (value as any).importPath;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const title = (value as any).title;
-        if(importPath.includes(cmpPath)) {
+        if (importPath.includes(cmpPath)) {
           componentTitle.add(title);
         }
       }
     }
-    // generate regex
     const regex = generateRegex(componentTitle);
-    // pass to loki
-    console.log("Ensure you are running storyook !!");
+
+    console.log("Ensure you are running storyook at http://localhost:6006/!!");
     if (packageManager === "yarn-berry") {
       execCommand(`yarn loki test --storiesFilter="${regex}"`);
-    } 
-    else if (packageManager === "npm") {
+    } else if (packageManager === "npm") {
       execCommand(`npm run loki test --storiesFilter="${regex}"`);
     } else if (packageManager === "pnpm") {
       execCommand(`pnpm run loki test --storiesFilter="${regex}"`);
     } else if (packageManager === "bun") {
       execCommand(`bun run loki test --storiesFilter="${regex}"`);
-    } 
-    else {
+    } else {
       console.log(
         "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
       );

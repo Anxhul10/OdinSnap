@@ -29,7 +29,7 @@ export async function getHeadCommit(context: githubContext) {
 export async function getChangedFile(context: githubContext) {
   const headCommit = await getHeadCommit(context);
   const baseCommit = await getBaseCommit(context);
-
+  if(headCommit == '' && baseCommit == '') return [];
   // `git --no-pager diff --name-only --no-relative ${baseCommit} ${headCommit}`
   const { stdout } = await execa("git", [
     "--no-pager",

@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 import { checkPkgExist } from "@/packages/cliHelpers/checkPkgExist";
-import { generateStats } from "@/packages/cliHelpers/generateStats";
 import { mkdir } from "@/packages/cliHelpers/mkdir";
 import fs from "fs";
-import dag from "dag-rs";
 import { identifyPackageManager } from "identify-package-manager";
 import { execCommand } from "@/packages/utils/execCommand";
 import { trimStats } from "@/packages/utils/trimStats";
 import path from "path";
 import { readStatsFile } from "@/packages/utils/readStats";
+import { generateRegex } from "@/packages/cliHelpers/generateRegex";
 
 interface IReason {
   moduleName: string;
@@ -120,8 +119,25 @@ export async function runner() {
         }
       }
     }
-    console.log(componentTitle);
-
+    // generate regex
+    const regex = generateRegex(componentTitle);
+    // pass to loki
+    console.log("Ensure you are running storyook !!");
+    if (packageManager === "yarn-berry") {
+      execCommand(`yarn loki test --storiesFilter="${regex}"`);
+    } 
+    else if (packageManager === "npm") {
+      execCommand(`npm run loki test --storiesFilter="${regex}"`);
+    } else if (packageManager === "pnpm") {
+      execCommand(`pnpm run loki test --storiesFilter="${regex}"`);
+    } else if (packageManager === "bun") {
+      execCommand(`bun run loki test --storiesFilter="${regex}"`);
+    } 
+    else {
+      console.log(
+        "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
+      );
+    }
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

@@ -31,7 +31,7 @@
     "yarn": "4.9.0"
   },
   "dependencies": {
-    "@actions/github": "^6.0.1",
+    "@actions/github": "^9.0.0",
     "@discoveryjs/json-ext": "^0.6.3",
     "dag-rs": "^0.2.1",
     "execa": "^9.6.1",

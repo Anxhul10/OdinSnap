@@ -15,6 +15,7 @@ By focusing only on changed and dependent components, OdinSnap helps developers 
 - [Node.js](https://nodejs.org/) **16+**
 - [Docker](https://www.docker.com/)
 - [Git](https://git-scm.com/)
+- [Storybook](https://storybook.js.org/) **v8**
 - [Loki](https://loki.js.org/) (Visual Regression Testing for Storybook)
 
 ## Usage
@@ -57,6 +58,44 @@ Link the package locally:
 In the same terminal, navigate to a project that has **Loki installed** and run:
 
     odinsnap
+
+## Contributing
+
+Contributions are welcome! You can contribute in multiple ways:
+
+- **Report bugs or suggest improvements** by opening an issue
+- **Discuss ideas or features** through issues
+- **Submit pull requests** with fixes or new features
+- **Improve documentation**
+
+### Reporting Issues
+
+If you find a bug or have a feature request, please open an issue and include:
+
+- A clear description of the problem or suggestion
+- Steps to reproduce (if it's a bug)
+- Expected vs actual behavior
+- Any relevant logs or screenshots
+
+### Submitting Changes
+
+1. Fork the repository
+2. Create a new branch
+
+       git checkout -b feature/my-feature
+
+3. Make your changes and commit them
+
+       git commit -m "feat: add new feature"
+
+4. Push to your fork
+
+       git push origin feature/my-feature
+
+5. Open a Pull Request
+
+Please ensure your changes follow the existing coding style and include relevant tests if applicable.
+
 
 ## Working (Experimental – might change)
 

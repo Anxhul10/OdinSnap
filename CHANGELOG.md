@@ -1,5 +1,11 @@
 # odinsnap
 
+## 2.1.0
+
+### Minor Changes
+
+- Fix the changelog by updating automation logic, reordering build and visual regression tests (VRT) using Loki, and fixing mixed logs from the build and VRT steps produced by Loki.
+
 ## 2.0.0
 
 ### Major Changes

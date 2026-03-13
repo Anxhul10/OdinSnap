@@ -17,6 +17,7 @@ By focusing only on changed and dependent components, OdinSnap helps developers 
 - [Git](https://git-scm.com/)
 - [Storybook](https://storybook.js.org/) **v8**
 - [Loki](https://loki.js.org/) (Visual Regression Testing for Storybook)
+- [npx](https://docs.npmjs.com/cli/v8/commands/npx)
 
 ## Usage
 
@@ -82,20 +83,19 @@ If you find a bug or have a feature request, please open an issue and include:
 1. Fork the repository
 2. Create a new branch
 
-       git checkout -b feature/my-feature
+   git checkout -b feature/my-feature
 
 3. Make your changes and commit them
 
-       git commit -m "feat: add new feature"
+   git commit -m "feat: add new feature"
 
 4. Push to your fork
 
-       git push origin feature/my-feature
+   git push origin feature/my-feature
 
 5. Open a Pull Request
 
 Please ensure your changes follow the existing coding style and include relevant tests if applicable.
-
 
 ## Working (Experimental – might change)
 

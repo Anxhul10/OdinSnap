@@ -80,7 +80,9 @@ export async function runner() {
   });
   if (res) {
     // non-monorepo project
-    await execCommand("npx storybook build --config-dir storybook --output-dir storybook-static --stats-json");
+    await execCommand(
+      "npx storybook build --config-dir storybook --output-dir storybook-static --stats-json",
+    );
     const filePath = "./storybook-static/preview-stats.json";
     const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
     const componentStatsPath = "./storybook-static/index.json";
@@ -110,7 +112,6 @@ export async function runner() {
 
     console.log("Ensure you are running storyook at http://localhost:6006/!!");
     await execCommand(`npx loki test --storiesFilter="${regex}"`);
-
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

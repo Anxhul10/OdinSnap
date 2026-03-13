@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- fix changefile by replacing actions logic, reorder build & vrt usign Loki and fix mixed logs from build and vrt by Loki
+- Fix the changelog by updating automation logic, reordering build and visual regression tests (VRT) using Loki, and fixing mixed logs from the build and VRT steps produced by Loki.
 
 ## 2.0.0
 

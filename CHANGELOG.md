@@ -1,5 +1,11 @@
 # odinsnap
 
+## 2.1.1
+
+### Patch Changes
+
+- fix loki regex and add stories file onto affected files or components
+
 ## 2.1.0
 
 ### Minor Changes

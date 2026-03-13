@@ -1,5 +1,11 @@
 # odinsnap
 
+## 2.1.0
+
+### Minor Changes
+
+- fix changefile by replacing actions logic, reorder build & vrt usign Loki and fix mixed logs from build and vrt by Loki
+
 ## 2.0.0
 
 ### Major Changes

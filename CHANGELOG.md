@@ -1,5 +1,11 @@
 # odinsnap
 
+## 2.1.3
+
+### Patch Changes
+
+- fix all issues now works, last fix: conditionaly use default storybook config folder
+
 ## 2.1.2
 
 ### Patch Changes

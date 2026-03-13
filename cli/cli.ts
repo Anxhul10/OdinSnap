@@ -81,7 +81,7 @@ export async function runner() {
   if (res) {
     // non-monorepo project
     await execCommand(
-      "npx storybook build --config-dir storybook --output-dir storybook-static --stats-json",
+      "npx storybook build --output-dir storybook-static --stats-json",
     );
     const filePath = "./storybook-static/preview-stats.json";
     const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");

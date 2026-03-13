@@ -82,11 +82,16 @@ export async function runner() {
   if (changedFiles.length == 0) {
     console.log("No affected components");
   }
+  let configDir = ".storybook";
+  if (!fs.existsSync(".storybook") && fs.existsSync("storybook")) {
+    configDir = "storybook";
+  }
   if (res) {
     // non-monorepo project
     await execCommand(
-      "npx storybook build --output-dir storybook-static --stats-json",
+      `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,
     );
+
     const filePath = "./storybook-static/preview-stats.json";
     const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
     const componentStatsPath = "./storybook-static/index.json";

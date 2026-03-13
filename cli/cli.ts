@@ -113,7 +113,7 @@ export async function runner() {
     }
     const regex = generateRegex(componentTitle);
 
-    console.log("Ensure you are running storyook at http://localhost:6006/!!");
+    console.log("Ensure you are running storyook at http://172.16.243.93:9001");
     await execCommand(`npx loki test --storiesFilter="${regex}"`);
   } else {
     console.warn(

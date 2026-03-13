@@ -8,8 +8,8 @@ import { trimStats } from "@/packages/utils/trimStats";
 import path from "path";
 import { readStatsFile } from "@/packages/utils/readStats";
 import { generateRegex } from "@/packages/cliHelpers/generateRegex";
-import { getChangedFile } from "@/packages/git/git";
-import * as github from "@actions/github";
+import { getChangedFileLocal } from "@/packages/git/getChangedFileLocal";
+import { execa } from "execa";
 
 interface IReason {
   moduleName: string;
@@ -69,9 +69,10 @@ export function affectedComponent(
 }
 
 export async function runner() {
-  const context = github.context;
+  const headCommit = await execa`git rev-parse HEAD`;
+  const changedFiles = await getChangedFileLocal(headCommit.stdout);
+
   // temp variable for test only !!
-  const changedFiles = await getChangedFile(context);
   const filePath = "./storybook-static/preview-stats.json";
   const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
   const componentStatsPath = "./storybook-static/index.json";

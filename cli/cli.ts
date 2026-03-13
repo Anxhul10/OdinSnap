@@ -68,6 +68,7 @@ export function affectedComponent(
 }
 
 export async function runner() {
+  console.log("Ensure you are running storyook at http://172.16.243.93:9001");
   const headCommit = await execa`git rev-parse HEAD`;
   const changedFiles = await getChangedFileLocal(headCommit.stdout);
   const res = checkPkgExist("./package.json", "loki");
@@ -98,6 +99,9 @@ export async function runner() {
 
     for (const filePath of changedFiles) {
       affectedComponent(filePath, stats);
+      if (filePath.includes("stories")) {
+        affectedPaths.add(filePath);
+      }
     }
 
     for (const cmpPath of affectedPaths) {
@@ -113,7 +117,6 @@ export async function runner() {
     }
     const regex = generateRegex(componentTitle);
 
-    console.log("Ensure you are running storyook at http://172.16.243.93:9001");
     await execCommand(`npx loki test --storiesFilter="${regex}"`);
   } else {
     console.warn(

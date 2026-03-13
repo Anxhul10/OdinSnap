@@ -2,7 +2,6 @@
 import { checkPkgExist } from "@/packages/cliHelpers/checkPkgExist";
 import { mkdir } from "@/packages/cliHelpers/mkdir";
 import fs from "fs";
-import { identifyPackageManager } from "identify-package-manager";
 import { execCommand } from "@/packages/utils/execCommand";
 import { trimStats } from "@/packages/utils/trimStats";
 import path from "path";
@@ -71,11 +70,6 @@ export function affectedComponent(
 export async function runner() {
   const headCommit = await execa`git rev-parse HEAD`;
   const changedFiles = await getChangedFileLocal(headCommit.stdout);
-
-  // temp variable for test only !!
-  const filePath = "./storybook-static/preview-stats.json";
-  const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
-  const componentStatsPath = "./storybook-static/index.json";
   const res = checkPkgExist("./package.json", "loki");
   fs.stat("./OdinSnap", function (err) {
     if (err !== null && err.code === "ENOENT") {
@@ -86,20 +80,11 @@ export async function runner() {
   });
   if (res) {
     // non-monorepo project
-    const packageManager = identifyPackageManager(true);
-    if (packageManager === "yarn-berry") {
-      execCommand("yarn storybook build --stats-json");
-    } else if (packageManager === "npm") {
-      execCommand("npm run storybook build --stats-json");
-    } else if (packageManager === "pnpm") {
-      execCommand("pnpm run storybook build --stats-json");
-    } else if (packageManager === "bun") {
-      execCommand("bun run storybook build --stats-json");
-    } else {
-      console.log(
-        "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
-      );
-    }
+    await execCommand("npx storybook build --config-dir storybook --output-dir storybook-static --stats-json");
+    const filePath = "./storybook-static/preview-stats.json";
+    const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
+    const componentStatsPath = "./storybook-static/index.json";
+
     await trimStats(filePath, trimmedName);
     const statsPath = trimmedName;
 
@@ -124,19 +109,8 @@ export async function runner() {
     const regex = generateRegex(componentTitle);
 
     console.log("Ensure you are running storyook at http://localhost:6006/!!");
-    if (packageManager === "yarn-berry") {
-      execCommand(`yarn loki test --storiesFilter="${regex}"`);
-    } else if (packageManager === "npm") {
-      execCommand(`npm run loki test --storiesFilter="${regex}"`);
-    } else if (packageManager === "pnpm") {
-      execCommand(`pnpm run loki test --storiesFilter="${regex}"`);
-    } else if (packageManager === "bun") {
-      execCommand(`bun run loki test --storiesFilter="${regex}"`);
-    } else {
-      console.log(
-        "some unknown package manager is being used !! or yarn version 1 or 2 is being used",
-      );
-    }
+    await execCommand(`npx loki test --storiesFilter="${regex}"`);
+
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

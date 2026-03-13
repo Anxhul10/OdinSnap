@@ -17,6 +17,7 @@ By focusing only on changed and dependent components, OdinSnap helps developers 
 - [Git](https://git-scm.com/)
 - [Storybook](https://storybook.js.org/) **v8**
 - [Loki](https://loki.js.org/) (Visual Regression Testing for Storybook)
+- [npx] (https://docs.npmjs.com/cli/v8/commands/npx)
 
 ## Usage
 

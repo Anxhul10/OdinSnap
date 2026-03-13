@@ -6,6 +6,9 @@
     ".": "./dist/index.js"
   },
   "bin": "./dist/bin/odinsnap.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p . && tsc-alias",
     "start": "yarn run build -- --w",
@@ -25,6 +28,16 @@
     "tsc-alias": "1.8.16",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0"
+  },
+  "author": "Anxhul10",
+  "license": "MIT",
+  "homepage": "https://github.com/Anxhul10/OdinSnap#readme",
+  "bugs": {
+    "url": "https://github.com/Anxhul10/OdinSnap/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anxhul10/OdinSnap.git"
   },
   "engines": {
     "node": ">=22.0.0",

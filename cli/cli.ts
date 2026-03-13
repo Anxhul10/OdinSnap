@@ -78,6 +78,9 @@ export async function runner() {
       console.log(".OdinSnap exists");
     }
   });
+  if (changedFiles.length == 0) {
+    console.log("No affected components");
+  }
   if (res) {
     // non-monorepo project
     await execCommand(

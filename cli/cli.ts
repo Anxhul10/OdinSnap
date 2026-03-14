@@ -76,8 +76,16 @@ export function affectedComponent(
 }
 
 export async function runner() {
-  console.log("Ensure you are running storyook at http://172.16.243.93:9001");
-  console.log("add files to barrelImports ");
+  console.log("Ensure you are running Storybook at http://172.16.243.93:9001");
+
+  console.log("\nOdinSnap configuration recommended for better accuracy.");
+  console.log(
+    "If OdinSnap detects too many components as affected, configure it in your package.json.\n",
+  );
+  console.log("See documentation:");
+  console.log(
+    "https://github.com/Anxhul10/OdinSnap/blob/chore/cli-init/README.md#odinsnap-configuration\n",
+  );
   const headCommit = await execa`git rev-parse HEAD`;
   const changedFiles = await getChangedFileLocal(headCommit.stdout);
   const res = checkPkgExist("./package.json", "loki");
@@ -106,9 +114,9 @@ export async function runner() {
         // do nothing
       }
     }
-    // await execCommand(
-    //   `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,
-    // );
+    await execCommand(
+      `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,
+    );
 
     const filePath = "./storybook-static/preview-stats.json";
     const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
@@ -145,8 +153,7 @@ export async function runner() {
       }
     }
     const regex = generateRegex(componentTitle);
-    console.log(componentTitle);
-    // await execCommand(`npx loki test --storiesFilter="${regex}"`);
+    await execCommand(`npx loki test --storiesFilter="${regex}"`);
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

@@ -28,10 +28,7 @@ Example:
 ```json
 {
   "odinsnap": {
-    "barrelFiles": [
-      "src/js/components/index.js",
-      "src/js/index.js"
-    ],
+    "barrelFiles": ["src/js/components/index.js", "src/js/index.js"],
     "depth": 4
   }
 }
@@ -75,6 +72,7 @@ By listing these files in `barrelFiles`, OdinSnap will **ignore them when detect
 
 **Note:**  
 If a barrel file exists **inside a specific component folder** and only exports files from that component, it does **not need to be ignored**, since it only affects that single component.
+
 ## Usage
 
     yarn add odinsnap

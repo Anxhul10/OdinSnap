@@ -1,5 +1,11 @@
 # odinsnap
 
+## 2.1.4
+
+### Patch Changes
+
+- add configs for odinsnap barrelImports and depth
+
 ## 2.1.3
 
 ### Patch Changes

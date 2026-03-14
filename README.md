@@ -19,6 +19,60 @@ By focusing only on changed and dependent components, OdinSnap helps developers 
 - [Loki](https://loki.js.org/) (Visual Regression Testing for Storybook)
 - [npx](https://docs.npmjs.com/cli/v8/commands/npx)
 
+## OdinSnap Configuration
+
+You can configure OdinSnap in your `package.json` so it understands your project structure and can correctly detect which components are affected by code changes.
+
+Example:
+
+```json
+{
+  "odinsnap": {
+    "barrelFiles": ["src/js/components/index.js", "src/js/index.js"],
+    "depth": 4
+  }
+}
+```
+
+---
+
+### `depth`
+
+`depth` tells OdinSnap where the **component folder appears in the file path**.
+
+Example structure:
+
+```
+src / js / components / Button / Button.js
+                       ↑
+                    depth = 4
+```
+
+The value should point to the **folder that represents the component itself** (e.g., `Button`).  
+This helps OdinSnap determine which component a changed file belongs to and match it with the corresponding Storybook stories.
+
+---
+
+### `barrelFiles`
+
+Barrel files are files that **re-export multiple components from a single entry point**.
+
+Example:
+
+```js
+// src/js/components/index.js
+export * from "./Button";
+export * from "./Input";
+export * from "./RadioButton";
+```
+
+Changes in these files can affect **many components at once**, which can cause OdinSnap to incorrectly detect every component as affected.
+
+By listing these files in `barrelFiles`, OdinSnap will **ignore them when detecting affected components**.
+
+**Note:**  
+If a barrel file exists **inside a specific component folder** and only exports files from that component, it does **not need to be ignored**, since it only affects that single component.
+
 ## Usage
 
     yarn add odinsnap

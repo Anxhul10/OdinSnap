@@ -25,7 +25,7 @@ interface IStats {
 }
 const affectedPaths: Set<string> = new Set();
 const componentTitle: Set<string> = new Set();
-let barrelImports = new Array();
+let barrelImports: Array<string> = [];
 let depth: undefined | number = undefined;
 export function removeDot(filePath: string) {
   const split = filePath.split("/");
@@ -107,12 +107,8 @@ export async function runner() {
     // non-monorepo project
     const packageJSON = await readStatsFile("package.json");
     if (packageJSON.odinsnap) {
-      try {
-        barrelImports = packageJSON.odinsnap["barrelImports"];
-        depth = packageJSON.odinsnap.depth;
-      } catch (e) {
-        // do nothing
-      }
+      barrelImports = packageJSON.odinsnap["barrelImports"];
+      depth = packageJSON.odinsnap.depth;
     }
     await execCommand(
       `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,

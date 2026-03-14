@@ -26,7 +26,7 @@ interface IStats {
 const affectedPaths: Set<string> = new Set();
 const componentTitle: Set<string> = new Set();
 let barrelImports = new Array();
-let depth = undefined;
+let depth: undefined | number = undefined;
 export function removeDot(filePath: string) {
   const split = filePath.split("/");
   if (split[0] == ".") {
@@ -45,11 +45,14 @@ export function affectedComponent(
   visited: Set<string> = new Set(),
 ) {
   filePath = removeDot(filePath);
-  for (const to_ignore of barrelImports) {
-    if (filePath.includes(to_ignore)) {
-      visited.add(filePath);
+  if (barrelImports != undefined) {
+    for (const to_ignore of barrelImports) {
+      if (filePath.includes(to_ignore)) {
+        visited.add(filePath);
+      }
     }
   }
+
   if (visited.has(filePath)) {
     return;
   }
@@ -74,6 +77,7 @@ export function affectedComponent(
 
 export async function runner() {
   console.log("Ensure you are running storyook at http://172.16.243.93:9001");
+  console.log("add files to barrelImports ");
   const headCommit = await execa`git rev-parse HEAD`;
   const changedFiles = await getChangedFileLocal(headCommit.stdout);
   const res = checkPkgExist("./package.json", "loki");
@@ -95,8 +99,12 @@ export async function runner() {
     // non-monorepo project
     const packageJSON = await readStatsFile("package.json");
     if (packageJSON.odinsnap) {
-      barrelImports = packageJSON.odinsnap["barrel-imports"];
-      depth = packageJSON.odinsnap.depth;
+      try {
+        barrelImports = packageJSON.odinsnap["barrelImports"];
+        depth = packageJSON.odinsnap.depth;
+      } catch (e) {
+        // do nothing
+      }
     }
     await execCommand(
       `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,
@@ -118,7 +126,6 @@ export async function runner() {
         affectedPaths.add(filePath);
       }
     }
-
     for (const cmpPath of affectedPaths) {
       for (const [, value] of Object.entries(componentStats.entries)) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -131,9 +138,8 @@ export async function runner() {
       }
     }
     const regex = generateRegex(componentTitle);
-    console.log(componentTitle);
 
-    // await execCommand(`npx loki test --storiesFilter="${regex}"`);
+    await execCommand(`npx loki test --storiesFilter="${regex}"`);
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

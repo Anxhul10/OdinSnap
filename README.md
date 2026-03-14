@@ -94,7 +94,11 @@ If a barrel file exists **inside a specific component folder** and only exports 
 
 ## Example
 
-Coming soon!
+- **Example Repository:**  
+  https://github.com/Anxhul10/grommet/tree/demo/odinsnap
+
+- **Demo Video:**  
+  https://youtu.be/dN_HVi4O5Kw
 
 ## Development
 

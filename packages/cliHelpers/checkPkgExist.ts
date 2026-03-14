@@ -9,7 +9,6 @@ export function checkPkgExist(JSONfilePath: string, pkgName: string): boolean {
     if (typeof val === "object") {
       for (const pkg in val) {
         if (pkg === pkgName) {
-          console.log(pkg);
           return true;
         }
       }

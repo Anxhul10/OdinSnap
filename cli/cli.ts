@@ -25,7 +25,8 @@ interface IStats {
 }
 const affectedPaths: Set<string> = new Set();
 const componentTitle: Set<string> = new Set();
-
+let barrelImports = new Array();
+let depth = undefined;
 export function removeDot(filePath: string) {
   const split = filePath.split("/");
   if (split[0] == ".") {
@@ -44,7 +45,11 @@ export function affectedComponent(
   visited: Set<string> = new Set(),
 ) {
   filePath = removeDot(filePath);
-
+  for (const to_ignore of barrelImports) {
+    if (filePath.includes(to_ignore)) {
+      visited.add(filePath);
+    }
+  }
   if (visited.has(filePath)) {
     return;
   }
@@ -88,6 +93,11 @@ export async function runner() {
   }
   if (res) {
     // non-monorepo project
+    const packageJSON = await readStatsFile("package.json");
+    if (packageJSON.odinsnap) {
+      barrelImports = packageJSON.odinsnap["barrel-imports"];
+      depth = packageJSON.odinsnap.depth;
+    }
     await execCommand(
       `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,
     );
@@ -121,8 +131,9 @@ export async function runner() {
       }
     }
     const regex = generateRegex(componentTitle);
+    console.log(componentTitle);
 
-    await execCommand(`npx loki test --storiesFilter="${regex}"`);
+    // await execCommand(`npx loki test --storiesFilter="${regex}"`);
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

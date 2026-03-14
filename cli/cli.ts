@@ -106,9 +106,9 @@ export async function runner() {
         // do nothing
       }
     }
-    await execCommand(
-      `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,
-    );
+    // await execCommand(
+    //   `npx storybook build --output-dir storybook-static --config-dir ${configDir} --stats-json`,
+    // );
 
     const filePath = "./storybook-static/preview-stats.json";
     const trimmedName = path.join(".OdinSnap", "trimmed-stats.json");
@@ -132,14 +132,21 @@ export async function runner() {
         const importPath = (value as any).importPath;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const title = (value as any).title;
-        if (importPath.includes(cmpPath)) {
-          componentTitle.add(title);
+        if (depth != undefined) {
+          const componentName = cmpPath.split(path.sep)[depth];
+          if (importPath.includes(`${path.sep}${componentName}${path.sep}`)) {
+            componentTitle.add(title);
+          }
+        } else {
+          if (importPath.includes(cmpPath)) {
+            componentTitle.add(title);
+          }
         }
       }
     }
     const regex = generateRegex(componentTitle);
-
-    await execCommand(`npx loki test --storiesFilter="${regex}"`);
+    console.log(componentTitle);
+    // await execCommand(`npx loki test --storiesFilter="${regex}"`);
   } else {
     console.warn(
       "OdinSnap requires 'loki' to be installed as a Dependency for visual regression testing. Please install it to continue.",

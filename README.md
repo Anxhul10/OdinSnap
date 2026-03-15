@@ -2,6 +2,14 @@
   <img src="https://github.com/user-attachments/assets/39fad66c-b801-46cd-a00f-b572be83749c" width="500" height="400" alt="OdinSnap" />
 </p>
 
+## Example
+
+- **Example Repository:**  
+  https://github.com/Anxhul10/grommet/tree/demo/odinsnap
+
+- **Demo Video:**  
+  https://youtu.be/dN_HVi4O5Kw
+
 ## Why use OdinSnap
 
 OdinSnap is a smart visual regression testing tool designed to optimize UI testing workflows. Instead of running visual tests for the entire Storybook, OdinSnap analyzes the Git changes in a project and identifies the components that were modified or affected.
@@ -91,14 +99,6 @@ If a barrel file exists **inside a specific component folder** and only exports 
 - Add **monorepo support**
 - Export a function that returns the **generated regex for affected components**
 - Add **CLI support for other visual regression tools**
-
-## Example
-
-- **Example Repository:**  
-  https://github.com/Anxhul10/grommet/tree/demo/odinsnap
-
-- **Demo Video:**  
-  https://youtu.be/dN_HVi4O5Kw
 
 ## Development
 

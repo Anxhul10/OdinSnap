@@ -1,9 +1,9 @@
+[![npm](https://img.shields.io/npm/v/odinsnap.svg)](https://npmjs.com/package/odinsnap) 
+[![](https://img.shields.io/npm/dt/odinsnap?style=flat&label=downloads&color=3b9648&labelColor=484848&logo=npm)](https://www.npmjs.com/package/odinsnap)
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/39fad66c-b801-46cd-a00f-b572be83749c" width="500" height="400" alt="OdinSnap" />
 </p>
-
-[![npm](https://img.shields.io/npm/v/odinsnap.svg)](https://npmjs.com/package/odinsnap) 
-[![](https://img.shields.io/npm/dt/odinsnap?style=flat&label=downloads&color=3b9648&labelColor=484848&logo=npm)](https://www.npmjs.com/package/odinsnap)
 
 ## Example
 
